@@ -1,0 +1,27 @@
+import socket
+import threading
+import time
+import pdb
+def tcplinkFun(sock, addr):
+    sendStr = "you have conncet to server success!"
+    sock.send(sendStr.encode())
+    while True:
+        data = sock.recv(10)
+        print ("I receive data: ", data)
+        time.sleep(1)
+        sock.send("hello: ".encode() + data)
+    sock.close()
+    rint ("close: ", addr)
+
+mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#mySocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+mySocket.bind(("192.168.0.109", 9999));
+mySocket.listen(1024)
+print ("Waiting for conection")
+while True:
+        sock, addr = mySocket.accept()
+        print ("accept: ", sock, " , ", addr)
+        t = threading.Thread(target = tcplinkFun, args = (sock, addr))
+        t.start()
+
+
