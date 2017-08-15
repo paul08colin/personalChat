@@ -1,0 +1,23 @@
+message Login
+{
+	required int64 id = 1;
+	required string passwd = 2;
+};
+message LoginMsg
+{
+	required int64 id = 1;
+	required string name = 2;
+};
+
+message SendMsg
+{
+	required int64 Fromid = 1;
+	required int64 toId = 2;
+	required string content = 3;
+};
+message receiveMsg
+{
+	required int64 Fromid = 1;
+	required string content = 2;
+
+};
